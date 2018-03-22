@@ -1,14 +1,10 @@
-import { applyMiddleware, compose } from 'redux';
-import { createRoutes } from 'react-router';
-import replaceRoutesMiddleware from './replaceRoutesMiddleware';
+import { applyMiddleware, compose } from "redux";
+import { createRoutes } from "react-router";
+import replaceRoutesMiddleware from "./replaceRoutesMiddleware";
 
 export default function routeReplacement(next) {
   return options => createStore => (reducer, initialState) => {
-    const {
-      routes: baseRoutes,
-      getRoutes,
-      routerStateSelector
-    } = options;
+    const { routes: baseRoutes, getRoutes, routerStateSelector } = options;
 
     let store;
 
@@ -22,7 +18,7 @@ export default function routeReplacement(next) {
       const routerState = routerStateSelector(store.getState());
       if (routerState && !isInit) {
         const { state, pathname, query } = routerState.location;
-        store.history.replace({state, pathname, query});
+        store.history.replace({ state, pathname, query });
       }
 
       if (!areChildRoutesResolved) {
@@ -40,22 +36,22 @@ export default function routeReplacement(next) {
         getState: () => store.getState()
       });
     } else {
-      routes = [{
-        getChildRoutes: (location, cb) => {
-          if (!areChildRoutesResolved) {
-            childRoutesCallbacks.push(cb);
-            return;
-          }
+      routes = [
+        {
+          getChildRoutes: (location, cb) => {
+            if (!areChildRoutesResolved) {
+              childRoutesCallbacks.push(cb);
+              return;
+            }
 
-          cb(null, childRoutes);
+            cb(null, childRoutes);
+          }
         }
-      }];
+      ];
     }
 
     store = compose(
-      applyMiddleware(
-        replaceRoutesMiddleware(replaceRoutes)
-      ),
+      applyMiddleware(replaceRoutesMiddleware(replaceRoutes)),
       next({
         ...options,
         routes: createRoutes(routes)

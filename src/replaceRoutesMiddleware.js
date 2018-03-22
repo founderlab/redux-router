@@ -1,4 +1,4 @@
-import { INIT_ROUTES, REPLACE_ROUTES } from './constants';
+import { INIT_ROUTES, REPLACE_ROUTES } from "./constants";
 
 export default function replaceRoutesMiddleware(replaceRoutes) {
   return () => next => action => {

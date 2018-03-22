@@ -1,9 +1,9 @@
-import { compose } from 'redux';
-import { routerDidChange } from './actionCreators';
-import routerStateEquals from './routerStateEquals';
-import reduxReactRouter from './reduxReactRouter';
-import useDefaults from './useDefaults';
-import routeReplacement from './routeReplacement';
+import { compose } from "redux";
+import { routerDidChange } from "./actionCreators";
+import routerStateEquals from "./routerStateEquals";
+import reduxReactRouter from "./reduxReactRouter";
+import useDefaults from "./useDefaults";
+import routeReplacement from "./routeReplacement";
 
 function historySynchronization(next) {
   return options => createStore => (reducer, initialState) => {
@@ -37,7 +37,7 @@ function historySynchronization(next) {
       ) {
         routerState = nextRouterState;
         const { state, pathname, query } = nextRouterState.location;
-        history.replace({state, pathname, query});
+        history.replace({ state, pathname, query });
       }
     });
 
@@ -45,8 +45,6 @@ function historySynchronization(next) {
   };
 }
 
-export default compose(
-  useDefaults,
-  routeReplacement,
-  historySynchronization
-)(reduxReactRouter);
+export default compose(useDefaults, routeReplacement, historySynchronization)(
+  reduxReactRouter
+);

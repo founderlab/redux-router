@@ -1,5 +1,5 @@
-import deepEqual from 'deep-equal';
-import { DOES_NEED_REFRESH } from './constants';
+import deepEqual from "deep-equal";
+import { DOES_NEED_REFRESH } from "./constants";
 
 /**
  * Check if two router states are equal. Ignores `location.key`.

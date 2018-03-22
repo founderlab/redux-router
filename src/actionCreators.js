@@ -1,4 +1,9 @@
-import { ROUTER_DID_CHANGE, INIT_ROUTES, REPLACE_ROUTES, HISTORY_API } from './constants';
+import {
+  ROUTER_DID_CHANGE,
+  INIT_ROUTES,
+  REPLACE_ROUTES,
+  HISTORY_API
+} from "./constants";
 
 /**
  * Action creator for signaling that the router has changed.
@@ -53,9 +58,9 @@ export function historyAPI(method) {
   });
 }
 
-export const push = historyAPI('push');
-export const replace = historyAPI('replace');
-export const setState = historyAPI('setState');
-export const go = historyAPI('go');
-export const goBack = historyAPI('goBack');
-export const goForward = historyAPI('goForward');
+export const push = historyAPI("push");
+export const replace = historyAPI("replace");
+export const setState = historyAPI("setState");
+export const go = historyAPI("go");
+export const goBack = historyAPI("goBack");
+export const goForward = historyAPI("goForward");

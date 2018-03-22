@@ -1,7 +1,7 @@
-export routerStateReducer from './routerStateReducer';
-export ReduxRouter from './ReduxRouter';
-export reduxReactRouter from './client';
-export isActive from './isActive';
+export routerStateReducer from "./routerStateReducer";
+export ReduxRouter from "./ReduxRouter";
+export reduxReactRouter from "./client";
+export isActive from "./isActive";
 
 export {
   historyAPI,
@@ -11,4 +11,4 @@ export {
   go,
   goBack,
   goForward
-} from './actionCreators';
+} from "./actionCreators";

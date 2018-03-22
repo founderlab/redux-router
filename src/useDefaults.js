@@ -1,5 +1,7 @@
 const defaults = {
-  onError: error => { throw error; },
+  onError: error => {
+    throw error;
+  },
   routerStateSelector: state => state.router
 };
 
@@ -9,11 +11,11 @@ export default function useDefaults(next) {
 
     const {
       createHistory: baseCreateHistory,
-      history: baseHistory,
+      history: baseHistory
     } = optionsWithDefaults;
 
     let createHistory;
-    if (typeof baseCreateHistory === 'function') {
+    if (typeof baseCreateHistory === "function") {
       createHistory = baseCreateHistory;
     } else if (baseHistory) {
       createHistory = () => baseHistory;

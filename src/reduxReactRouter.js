@@ -1,8 +1,8 @@
-import { applyMiddleware } from 'redux';
-import { useRouterHistory, createRoutes } from 'react-router';
-import createTransitionManager from 'react-router/lib/createTransitionManager' ;
-import historyMiddleware from './historyMiddleware';
-import { ROUTER_STATE_SELECTOR } from './constants';
+import { applyMiddleware } from "redux";
+import { useRouterHistory, createRoutes } from "react-router";
+import createTransitionManager from "react-router/lib/createTransitionManager";
+import historyMiddleware from "./historyMiddleware";
+import { ROUTER_STATE_SELECTOR } from "./constants";
 
 export default function reduxReactRouter({
   routes,
@@ -12,9 +12,8 @@ export default function reduxReactRouter({
   routerStateSelector
 }) {
   return createStore => (reducer, initialState) => {
-
     let baseCreateHistory;
-    if (typeof createHistory === 'function') {
+    if (typeof createHistory === "function") {
       baseCreateHistory = createHistory;
     } else if (createHistory) {
       baseCreateHistory = () => createHistory;
@@ -24,17 +23,18 @@ export default function reduxReactRouter({
 
     const history = createAppHistory({
       parseQueryString,
-      stringifyQuery,
+      stringifyQuery
     });
 
     const transitionManager = createTransitionManager(
-        history, createRoutes(routes)
+      history,
+      createRoutes(routes)
     );
 
-    const store =
-      applyMiddleware(
-        historyMiddleware(history)
-      )(createStore)(reducer, initialState);
+    const store = applyMiddleware(historyMiddleware(history))(createStore)(
+      reducer,
+      initialState
+    );
 
     store.transitionManager = transitionManager;
     store.history = history;

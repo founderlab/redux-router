@@ -1,4 +1,4 @@
-import { HISTORY_API } from './constants';
+import { HISTORY_API } from "./constants";
 
 /**
  * Middleware for interacting with the history API

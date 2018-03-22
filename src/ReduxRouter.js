@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { RouterContext as DefaultRoutingContext } from 'react-router';
-import { createRouterObject } from 'react-router/lib/RouterUtils';
-import routerStateEquals from './routerStateEquals';
-import { ROUTER_STATE_SELECTOR } from './constants';
-import { initRoutes, replaceRoutes } from './actionCreators';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { RouterContext as DefaultRoutingContext } from "react-router";
+import { createRouterObject } from "react-router/lib/RouterUtils";
+import routerStateEquals from "./routerStateEquals";
+import { ROUTER_STATE_SELECTOR } from "./constants";
+import { initRoutes, replaceRoutes } from "./actionCreators";
 
 function memoizeRouterStateSelector(selector) {
   let previousRouterState = null;
@@ -27,15 +27,19 @@ function getRoutesFromProps(props) {
 class ReduxRouter extends Component {
   static propTypes = {
     children: PropTypes.node
-  }
+  };
 
   static contextTypes = {
     store: PropTypes.object
-  }
+  };
 
   constructor(props, context) {
     super(props, context);
-    this.router = createRouterObject(context.store.history, context.store.transitionManager, {});
+    this.router = createRouterObject(
+      context.store.history,
+      context.store.transitionManager,
+      {}
+    );
   }
 
   componentWillMount() {
@@ -58,21 +62,18 @@ class ReduxRouter extends Component {
 
     if (!store) {
       throw new Error(
-        'Redux store missing from context of <ReduxRouter>. Make sure you\'re '
-      + 'using a <Provider>'
+        "Redux store missing from context of <ReduxRouter>. Make sure you're " +
+          "using a <Provider>"
       );
     }
 
-    const {
-      history,
-      [ROUTER_STATE_SELECTOR]: routerStateSelector
-    } = store;
+    const { history, [ROUTER_STATE_SELECTOR]: routerStateSelector } = store;
 
     if (!history || !routerStateSelector) {
       throw new Error(
-        'Redux store not configured properly for <ReduxRouter>. Make sure '
-      + 'you\'re using the reduxReactRouter() store enhancer.'
-    );
+        "Redux store not configured properly for <ReduxRouter>. Make sure " +
+          "you're using the reduxReactRouter() store enhancer."
+      );
     }
 
     return (
@@ -86,17 +87,15 @@ class ReduxRouter extends Component {
   }
 }
 
-@connect(
-  (state, { routerStateSelector }) => routerStateSelector(state) || {}
-)
+@connect((state, { routerStateSelector }) => routerStateSelector(state) || {})
 class ReduxRouterContext extends Component {
   static propTypes = {
     location: PropTypes.object,
     RoutingContext: PropTypes.func
-  }
+  };
 
   render() {
-    const {location} = this.props;
+    const { location } = this.props;
 
     if (location === null || location === undefined) {
       return null; // Async matching
