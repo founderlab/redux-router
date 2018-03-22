@@ -1,5 +1,5 @@
-import { routerDidChange } from './actionCreators';
-import { MATCH } from './constants';
+import { routerDidChange } from "./actionCreators";
+import { MATCH } from "./constants";
 
 export default function matchMiddleware(match) {
   return ({ dispatch }) => next => action => {
